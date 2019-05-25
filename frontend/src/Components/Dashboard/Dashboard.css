@@ -1,0 +1,17 @@
+.dashboard{
+  margin: 0;
+  position: fixed;
+  top: 40%;
+  left: 40%;
+  border: 2px solid black;
+  width: 300px;
+  height: 150px;
+  /* -ms-transform: translateY(-50%);
+  transform: translateY(-50%); */
+  /* width: 40%;
+  margin: 2px auto;
+  border: 2px solid black;
+  position: fixed;
+  top: 50%;
+  left: 50%; */
+}

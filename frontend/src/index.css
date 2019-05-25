@@ -1,0 +1,17 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-image: url('http://cyberalert.gr/en/inc/uploads/2015/08/ecommerce2.jpg') !important;
+  /*https://images.cdn2.stockunlimited.net/preview1300/online-shopping-theme-background_1287524.jpg*/
+  /*'http://cyberalert.gr/en/inc/uploads/2015/08/ecommerce2.jpg'*/
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}

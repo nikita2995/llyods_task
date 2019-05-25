@@ -1,0 +1,12 @@
+.container{
+    margin: 5px;
+    position: fixed;
+    top: 25%;
+    left: 35%;
+    border: 2px solid black;
+    border-radius: 10px;
+    width: 30% !important;
+    text-align: center;
+    padding: 30px;
+    background-color: white;
+  }
