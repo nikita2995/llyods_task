@@ -1,0 +1,637 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "sto-platform",
+        "description": "Swagger UI for LLyods Application",
+        "termsOfService": "http://swagger.io/terms/"
+    },
+    "host": "localhost:5000",
+    "basePath": "/api",
+    "tags": [
+        {
+            "name": "Company",
+            "description": "API for Company"
+        },
+        {
+            "name": "Kyc",
+            "description": "API for Kyc of User"
+        },
+        {
+            "name": "Token",
+            "description": "API for Token"
+        }
+    ],
+    "schemes": [
+        "http"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/company/{companyName}": {
+            "get": {
+                "tags": [
+                    "Company"
+                ],
+                "description": "Fetch Company",
+                "operationId": "",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "companyName",
+                        "in": "path",
+                        "description": "Fetch Company Request",
+                        "schema": {
+                            "$ref": "#/definitions/fetch"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Company found success response",
+                        "schema": {
+                            "$ref": "#/definitions/SuccessResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Company does not exists",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    },
+                    "409": {
+                        "description": "Something went wrong",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    },
+                    "422": {
+                        "description": "Empty field in request",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Error response from DB",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/company": {
+            "post": {
+                "tags": [
+                    "Company"
+                ],
+                "description": "Create Company",
+                "operationId": "",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "find User Request",
+                        "schema": {
+                            "$ref": "#/definitions/postCompany"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User found success response",
+                        "schema": {
+                            "$ref": "#/definitions/SuccessResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "User does not exists",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    },
+                    "409": {
+                        "description": "Something went wrong",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    },
+                    "422": {
+                        "description": "Empty field in request",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Error response from DB",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/kyc": {
+            "get": {
+                "tags": [
+                    "Kyc"
+                ],
+                "description": "Fetch Kyc",
+                "operationId": "",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "publicAddress",
+                        "in": "query",
+                        "description": "Fetch Kyc Request",
+                        "schema": {
+                            "$ref": "#/definitions/fetchKyc"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User found success response",
+                        "schema": {
+                            "$ref": "#/definitions/SuccessResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "User does not exists",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    },
+                    "409": {
+                        "description": "Something went wrong",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    },
+                    "422": {
+                        "description": "Empty field in request",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Error response from DB",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Kyc"
+                ],
+                "description": "Kyc submission",
+                "operationId": "",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "find User Request",
+                        "schema": {
+                            "$ref": "#/definitions/submitKyc"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Kyc submission success response",
+                        "schema": {
+                            "$ref": "#/definitions/SuccessResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Error in Kyc submission",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    },
+                    "409": {
+                        "description": "Something went wrong",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    },
+                    "422": {
+                        "description": "Empty field in request",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Error response from DB",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/auth": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "description": "User Auth",
+                "operationId": "",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "User Auth Request",
+                        "schema": {
+                            "$ref": "#/definitions/AuthUser"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User Auth success response",
+                        "schema": {
+                            "$ref": "#/definitions/SuccessResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "User does not exists",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    },
+                    "409": {
+                        "description": "Something went wrong",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    },
+                    "422": {
+                        "description": "Empty field in request",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Error response from DB",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/token": {
+            "get": {
+                "tags": [
+                    "Token"
+                ],
+                "description": "Fetch Token",
+                "operationId": "",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "tickerInitial",
+                        "in": "query",
+                        "description": "Fetch Kyc Request",
+                        "schema": {
+                            "$ref": "#/definitions/fetchToken"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Token info success response",
+                        "schema": {
+                            "$ref": "#/definitions/SuccessResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Token does not exists",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    },
+                    "409": {
+                        "description": "Something went wrong",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    },
+                    "422": {
+                        "description": "Empty field in request",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Error response from DB",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Token"
+                ],
+                "description": "Token creation",
+                "operationId": "",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Token creation Request",
+                        "schema": {
+                            "$ref": "#/definitions/createToken"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Token creation success response",
+                        "schema": {
+                            "$ref": "#/definitions/SuccessResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Error in Token creation",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    },
+                    "409": {
+                        "description": "Something went wrong",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    },
+                    "422": {
+                        "description": "Empty field in request",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Error response from DB",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Token"
+                ],
+                "description": "Token updation",
+                "operationId": "",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "find User Request",
+                        "schema": {
+                            "$ref": "#/definitions/updateToken"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Kyc submission success response",
+                        "schema": {
+                            "$ref": "#/definitions/SuccessResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Error in Kyc submission",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    },
+                    "409": {
+                        "description": "Something went wrong",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    },
+                    "422": {
+                        "description": "Empty field in request",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Error response from DB",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "fetch": {
+            "properties": {
+                "companyName": {
+                    "required": true,
+                    "type": "string",
+                    "example": "Sample"
+                }
+            }
+        },
+        "fetchToken": {
+            "properties": {
+                "tickerInitial": {
+                    "required": true,
+                    "type": "string",
+                    "example": "0x548425844sf48sf8ds44d4sf8ds"
+                }
+            }
+        },
+        "postCompany": {
+            "properties": {
+                "firstName": {
+                    "required": true,
+                    "type": "string",
+                    "example": "Sample First Name"
+                },
+                "lastName": {
+                    "required": true,
+                    "type": "string",
+                    "example": "Sample Last Name"
+                },
+                "email": {
+                    "required": true,
+                    "type": "string",
+                    "example": "sample@gmail.com"
+                },
+                "companyName": {
+                    "required": true,
+                    "type": "string",
+                    "example": "Sample Company Name"
+                },
+                "license": {
+                    "type": "object",
+                    "properties": {
+                        "startDate": {
+                            "required": true,
+                            "type": "string",
+                            "format": "date",
+                            "example": "2018-03-20"
+                        },
+                        "endDate": {
+                            "required": true,
+                            "type": "string",
+                            "format": "date",
+                            "example": "2018-03-20"
+                        }
+                    }
+                }
+            }
+        },
+        "AuthUser": {
+            "properties": {
+                "publicAddress": {
+                    "required": true,
+                    "type": "string",
+                    "example": "0x548425844sf48sf8ds44d4sf8ds"
+                },
+                "signature": {
+                    "required": true,
+                    "type": "string",
+                    "example": "0xab0c775d1bc2ca5430a5bd640435df02ffb15ba54b5811785a430c7fab2ef4372b69d840fc6f38e2c04716a687f8b1077156701944c2e39cba905168be8301c71b"
+                },
+                "kycId": {
+                    "type": "string",
+                    "example": "5cc1862624a93e7a2d35402e"
+                }
+            }
+        },
+        "createToken": {
+            "properties": {
+                "tokenName": {
+                    "required": true,
+                    "type": "string",
+                    "example": "Sample Token Name"
+                },
+                "tickerInitial": {
+                    "required": true,
+                    "type": "string",
+                    "example": "Sample Token Initial"
+                },
+                "tickerOwner": {
+                    "required": true,
+                    "type": "string",
+                    "example": "0x204737b3c54555ea92a5aabc25c5ae2395f38df4"
+                }
+            }
+        },
+        "updateToken": {
+            "properties": {
+                "tickerInitial": {
+                    "required": true,
+                    "type": "string",
+                    "example": "Sample Token Initial"
+                },
+                "tokenAddress": {
+                    "required": false,
+                    "type": "string",
+                    "example": "0x204737b3c54555ea92a5aabc25c5ae2395f38df4"
+                },
+                "txnHash": {
+                    "required": false,
+                    "type": "string",
+                    "example": "0x204737b3c54555ea92a5aabc25c5ae2395f38df4"
+                },
+                "divisible": {
+                    "required": false,
+                    "type": "boolean",
+                    "example": true
+                },
+                "tokenDetails": {
+                    "required": false,
+                    "type": "string",
+                    "example": "Sample details"
+                },
+                "maxInvestors": {
+                    "required": false,
+                    "type": "integer",
+                    "example": "2"
+                },
+                "startDate": {
+                    "required": false,
+                    "type": "string",
+                    "example": "date"
+                },
+                "endDate": {
+                    "required": false,
+                    "type": "string",
+                    "example": "date"
+                },
+                "hardCap": {
+                    "required": false,
+                    "type": "number",
+                    "example": "0.1"
+                },
+                "rate": {
+                    "required": false,
+                    "type": "number",
+                    "example": "0.1"
+                },
+                "fundingAddress": {
+                    "required": false,
+                    "type": "string",
+                    "example": "0x204737b3c54555ea92a5aabc25c5ae2395f38df4"
+                },
+                "stoAddress": {
+                    "required": false,
+                    "type": "string",
+                    "example": "0x204737b3c54555ea92a5aabc25c5ae2395f38df4"
+                },
+                "deployLegacy": {
+                    "required": false,
+                    "type": "boolean",
+                    "example": true
+                }
+            }
+        },
+        "ErrorResponse": {
+            "statusCode": 500,
+            "error": "Internal Server Error"
+        },
+        "SuccessResponse": {
+            "statusCode": 200,
+            "data": {}
+        }
+    }
+}

@@ -5,7 +5,7 @@ import './Register.css';
 class Register extends React.Component {
 
 	submitHandler(event) {
-
+		console.log(this.state);
 	}
 
 	state = {
@@ -17,6 +17,11 @@ class Register extends React.Component {
 		licenseEndDate: ''
 	};
 
+	onChangeHandler(event) {
+		this.setState({
+			[event.target.name]: event.target.value
+		})
+	}
 	render() {
 		return (
 			<Form className='container'>
@@ -26,7 +31,9 @@ class Register extends React.Component {
 					<Label sm={4}>First Name: </Label>
 					<Col sm={8}>
 						<Input
+							onChange={(event) => { this.onChangeHandler(event) }}
 							type='text'
+							name='firstName'
 							value={this.state.firstName}
 							placeholder='First Name'
 							required />
@@ -36,6 +43,8 @@ class Register extends React.Component {
 					<Label sm={4}>Last Name: </Label>
 					<Col sm={8}>
 						<Input
+							name='lastName'
+							onChange={(event) => { this.onChangeHandler(event) }}
 							type='text'
 							value={this.state.lastName}
 							placeholder='Last Name'
@@ -47,6 +56,8 @@ class Register extends React.Component {
 					<Col sm={8}>
 						<Input
 							type='email'
+							name='email'
+							onChange={(event) => { this.onChangeHandler(event) }}
 							value={this.state.email}
 							placeholder='Email'
 							required />
@@ -57,6 +68,8 @@ class Register extends React.Component {
 					<Col sm={8}>
 						<Input
 							type='text'
+							name='companyName'
+							onChange={(event) => { this.onChangeHandler(event) }}
 							value={this.state.companyName}
 							placeholder='Company Name'
 							required />
@@ -67,6 +80,8 @@ class Register extends React.Component {
 					<Col sm={8}>
 						<Input
 							type='date'
+							name='licenseStartDate'
+							onChange={(event) => { this.onChangeHandler(event) }}
 							value={this.state.licenseStartDate}
 							required />
 					</Col>
@@ -76,6 +91,8 @@ class Register extends React.Component {
 					<Col sm={8}>
 						<Input
 							type='date'
+							name='licenseEndDate'
+							onChange={(event) => { this.onChangeHandler(event) }}
 							value={this.state.licenseEndDate}
 							required />
 					</Col>

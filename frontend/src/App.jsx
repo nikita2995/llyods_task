@@ -3,8 +3,7 @@ import Register from './Components/Register/Register';
 import Dashboard from './Components/Dashboard/Dashboard';
 import {
   BrowserRouter as Router,
-  Route,
-  Link
+  Route
 } from 'react-router-dom';
 import './App.css';
 
