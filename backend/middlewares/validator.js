@@ -7,52 +7,74 @@ const Boom = require('boom');
 const { logger } = require('../utils');
 
 const schema = {
-  '/users': {
-    body: JOI.object().keys({
-      publicAddress: JOI.string().required()
-    }),
-    params: null,
-    query: JOI.object().keys({
-      publicAddress: JOI.string().required()
-    })
+
+  '/company': {
+    "POST": {
+      body: JOI.object().keys({
+        firstName: JOI.string().required(),
+        lastName: JOI.string().required(),
+        companyName: JOI.string().required(),
+        email: JOI.string().email().required(),
+        licenseStartDate: JOI.date().required(),
+        licenseEndDate: JOI.date().required()
+      }),
+      params: null
+    }
   },
-  '/kyc': {
-    body: JOI.object().keys({
-      firstName: JOI.string().required(),
-      lastName: JOI.string().required(),
-      email: JOI.string().email().required(),
-      phoneNumber: JOI.number(),
-      companyName: JOI.string().required(),
-      companyWebsite: JOI.string(),
-      message: JOI.string()
-    }),
-    query: null
+  '/company/:companyName/status': {
+    "GET": {
+      body: null,
+      params: JOI.object().keys({
+        companyName: JOI.string().required()
+      })
+    }
   },
-  '/auth': {
-    body: JOI.object().keys({
-      signature: JOI.string().required(),
-      publicAddress: JOI.string().required(),
-    }),
-    params: null,
+  '/company/:companyName': {
+    "GET": {
+      body: null,
+      params: JOI.object().keys({
+        companyName: JOI.string().required()
+      })
+    }
   },
-  '/token': {
-    body: JOI.object().keys({
-      tickerInitial: JOI.string().required(),
-      tokenName: JOI.string().required(),
-    })
+  '/admin/company/:companyName': {
+    "GET": {
+      body: null,
+      params: JOI.object().keys({
+        companyName: JOI.string().required()
+      })
+    }
+  },
+  '/admin/company': {
+    "GET": {
+      body: null,
+      params: null
+    },
+    "PUT": {
+      body: JOI.object().keys({
+        firstName: JOI.string().optional(),
+        lastName: JOI.string().optional(),
+        companyName: JOI.string().required(),
+        email: JOI.string().email().optional(),
+        licenseStartDate: JOI.date().optional(),
+        licenseEndDate: JOI.date().optional(),
+        licenseStatus: JOI.string().optional(),
+      }),
+      params: null
+    }
   }
 
 };
 
 module.exports = async (req, res, next) => {
   try {
-    if (schema[req.route.path].body) {
+    if (schema[req.route.path][req.method].body) {
       // Body validation
-      await JOI.validate(req.body, schema[req.route.path].body);
+      await JOI.validate(req.body, schema[req.route.path][req.method].body);
     }
-    if (schema[req.route.path].query) {
+    if (schema[req.route.path][req.method].params) {
       // Param validation
-      await JOI.validate(req.query, schema[req.route.path].query);
+      await JOI.validate(req.params, schema[req.route.path][req.method].params);
     }
     next();
   } catch (err) {

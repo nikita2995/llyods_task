@@ -2,7 +2,7 @@
     "swagger": "2.0",
     "info": {
         "version": "1.0.0",
-        "title": "sto-platform",
+        "title": "LLyods task",
         "description": "Swagger UI for LLyods Application",
         "termsOfService": "http://swagger.io/terms/"
     },
@@ -14,12 +14,8 @@
             "description": "API for Company"
         },
         {
-            "name": "Kyc",
-            "description": "API for Kyc of User"
-        },
-        {
-            "name": "Token",
-            "description": "API for Token"
+            "name": "Admin",
+            "description": "API for Admin"
         }
     ],
     "schemes": [
@@ -55,6 +51,60 @@
                 "responses": {
                     "200": {
                         "description": "Company found success response",
+                        "schema": {
+                            "$ref": "#/definitions/SuccessResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Company does not exists",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    },
+                    "409": {
+                        "description": "Something went wrong",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    },
+                    "422": {
+                        "description": "Empty field in request",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Error response from DB",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/company/{companyName}/status": {
+            "get": {
+                "tags": [
+                    "Company"
+                ],
+                "description": "Check Company Status",
+                "operationId": "",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "companyName",
+                        "in": "path",
+                        "description": "Check Company Status Request",
+                        "schema": {
+                            "$ref": "#/definitions/fetch"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Company Status success response",
                         "schema": {
                             "$ref": "#/definitions/SuccessResponse"
                         }
@@ -140,87 +190,35 @@
                 }
             }
         },
-        "/kyc": {
+        "/admin/company/{companyName}": {
             "get": {
                 "tags": [
-                    "Kyc"
+                    "Admin"
                 ],
-                "description": "Fetch Kyc",
+                "description": "Fetch Company",
                 "operationId": "",
                 "produces": [
                     "application/json"
                 ],
                 "parameters": [
                     {
-                        "name": "publicAddress",
-                        "in": "query",
-                        "description": "Fetch Kyc Request",
+                        "name": "companyName",
+                        "in": "path",
+                        "description": "Fetch Company Request",
                         "schema": {
-                            "$ref": "#/definitions/fetchKyc"
+                            "$ref": "#/definitions/fetch"
                         }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "User found success response",
+                        "description": "Company found success response",
                         "schema": {
                             "$ref": "#/definitions/SuccessResponse"
                         }
                     },
                     "404": {
-                        "description": "User does not exists",
-                        "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
-                        }
-                    },
-                    "409": {
-                        "description": "Something went wrong",
-                        "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
-                        }
-                    },
-                    "422": {
-                        "description": "Empty field in request",
-                        "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
-                        }
-                    },
-                    "500": {
-                        "description": "Error response from DB",
-                        "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
-                        }
-                    }
-                }
-            },
-            "post": {
-                "tags": [
-                    "Kyc"
-                ],
-                "description": "Kyc submission",
-                "operationId": "",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "body",
-                        "in": "body",
-                        "description": "find User Request",
-                        "schema": {
-                            "$ref": "#/definitions/submitKyc"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Kyc submission success response",
-                        "schema": {
-                            "$ref": "#/definitions/SuccessResponse"
-                        }
-                    },
-                    "404": {
-                        "description": "Error in Kyc submission",
+                        "description": "Company does not exists",
                         "schema": {
                             "$ref": "#/definitions/ErrorResponse"
                         }
@@ -246,141 +244,25 @@
                 }
             }
         },
-        "/auth": {
-            "post": {
-                "tags": [
-                    "Auth"
-                ],
-                "description": "User Auth",
-                "operationId": "",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "body",
-                        "in": "body",
-                        "description": "User Auth Request",
-                        "schema": {
-                            "$ref": "#/definitions/AuthUser"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "User Auth success response",
-                        "schema": {
-                            "$ref": "#/definitions/SuccessResponse"
-                        }
-                    },
-                    "404": {
-                        "description": "User does not exists",
-                        "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
-                        }
-                    },
-                    "409": {
-                        "description": "Something went wrong",
-                        "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
-                        }
-                    },
-                    "422": {
-                        "description": "Empty field in request",
-                        "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
-                        }
-                    },
-                    "500": {
-                        "description": "Error response from DB",
-                        "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
-                        }
-                    }
-                }
-            }
-        },
-        "/token": {
+        "/admin/company": {
             "get": {
                 "tags": [
-                    "Token"
+                    "Admin"
                 ],
-                "description": "Fetch Token",
+                "description": "Fetch All Company",
                 "operationId": "",
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
-                        "name": "tickerInitial",
-                        "in": "query",
-                        "description": "Fetch Kyc Request",
-                        "schema": {
-                            "$ref": "#/definitions/fetchToken"
-                        }
-                    }
-                ],
                 "responses": {
                     "200": {
-                        "description": "Token info success response",
+                        "description": "All Company success response",
                         "schema": {
                             "$ref": "#/definitions/SuccessResponse"
                         }
                     },
                     "404": {
-                        "description": "Token does not exists",
-                        "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
-                        }
-                    },
-                    "409": {
-                        "description": "Something went wrong",
-                        "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
-                        }
-                    },
-                    "422": {
-                        "description": "Empty field in request",
-                        "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
-                        }
-                    },
-                    "500": {
-                        "description": "Error response from DB",
-                        "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
-                        }
-                    }
-                }
-            },
-            "post": {
-                "tags": [
-                    "Token"
-                ],
-                "description": "Token creation",
-                "operationId": "",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "body",
-                        "in": "body",
-                        "description": "Token creation Request",
-                        "schema": {
-                            "$ref": "#/definitions/createToken"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Token creation success response",
-                        "schema": {
-                            "$ref": "#/definitions/SuccessResponse"
-                        }
-                    },
-                    "404": {
-                        "description": "Error in Token creation",
+                        "description": "Company does not exists",
                         "schema": {
                             "$ref": "#/definitions/ErrorResponse"
                         }
@@ -407,9 +289,9 @@
             },
             "put": {
                 "tags": [
-                    "Token"
+                    "Admin"
                 ],
-                "description": "Token updation",
+                "description": "Update Company",
                 "operationId": "",
                 "produces": [
                     "application/json"
@@ -418,21 +300,21 @@
                     {
                         "name": "body",
                         "in": "body",
-                        "description": "find User Request",
+                        "description": "Update Company Request",
                         "schema": {
-                            "$ref": "#/definitions/updateToken"
+                            "$ref": "#/definitions/putCompany"
                         }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "Kyc submission success response",
+                        "description": "Update Company success response",
                         "schema": {
                             "$ref": "#/definitions/SuccessResponse"
                         }
                     },
                     "404": {
-                        "description": "Error in Kyc submission",
+                        "description": "Company does not exists",
                         "schema": {
                             "$ref": "#/definitions/ErrorResponse"
                         }
@@ -500,128 +382,58 @@
                     "type": "string",
                     "example": "Sample Company Name"
                 },
-                "license": {
-                    "type": "object",
-                    "properties": {
-                        "startDate": {
-                            "required": true,
-                            "type": "string",
-                            "format": "date",
-                            "example": "2018-03-20"
-                        },
-                        "endDate": {
-                            "required": true,
-                            "type": "string",
-                            "format": "date",
-                            "example": "2018-03-20"
-                        }
-                    }
+                "licenseStartDate": {
+                    "required": true,
+                    "type": "string",
+                    "format": "date",
+                    "example": "2018-03-20"
+                },
+                "licenseEndDate": {
+                    "required": true,
+                    "type": "string",
+                    "format": "date",
+                    "example": "2018-03-20"
                 }
             }
         },
-        "AuthUser": {
+        "putCompany": {
             "properties": {
-                "publicAddress": {
+                "firstName": {
                     "required": true,
                     "type": "string",
-                    "example": "0x548425844sf48sf8ds44d4sf8ds"
+                    "example": "Sample First Name"
                 },
-                "signature": {
+                "lastName": {
                     "required": true,
                     "type": "string",
-                    "example": "0xab0c775d1bc2ca5430a5bd640435df02ffb15ba54b5811785a430c7fab2ef4372b69d840fc6f38e2c04716a687f8b1077156701944c2e39cba905168be8301c71b"
+                    "example": "Sample Last Name"
                 },
-                "kycId": {
-                    "type": "string",
-                    "example": "5cc1862624a93e7a2d35402e"
-                }
-            }
-        },
-        "createToken": {
-            "properties": {
-                "tokenName": {
+                "email": {
                     "required": true,
                     "type": "string",
-                    "example": "Sample Token Name"
+                    "example": "sample@gmail.com"
                 },
-                "tickerInitial": {
+                "companyName": {
                     "required": true,
                     "type": "string",
-                    "example": "Sample Token Initial"
+                    "example": "Sample Company Name"
                 },
-                "tickerOwner": {
+                "licenseStartDate": {
                     "required": true,
                     "type": "string",
-                    "example": "0x204737b3c54555ea92a5aabc25c5ae2395f38df4"
-                }
-            }
-        },
-        "updateToken": {
-            "properties": {
-                "tickerInitial": {
+                    "format": "date",
+                    "example": "2018-03-20"
+                },
+                "licenseEndDate": {
                     "required": true,
                     "type": "string",
-                    "example": "Sample Token Initial"
+                    "format": "date",
+                    "example": "2018-03-20"
                 },
-                "tokenAddress": {
-                    "required": false,
+                "licenseStatus": {
+                    "required": true,
                     "type": "string",
-                    "example": "0x204737b3c54555ea92a5aabc25c5ae2395f38df4"
-                },
-                "txnHash": {
-                    "required": false,
-                    "type": "string",
-                    "example": "0x204737b3c54555ea92a5aabc25c5ae2395f38df4"
-                },
-                "divisible": {
-                    "required": false,
-                    "type": "boolean",
-                    "example": true
-                },
-                "tokenDetails": {
-                    "required": false,
-                    "type": "string",
-                    "example": "Sample details"
-                },
-                "maxInvestors": {
-                    "required": false,
-                    "type": "integer",
-                    "example": "2"
-                },
-                "startDate": {
-                    "required": false,
-                    "type": "string",
-                    "example": "date"
-                },
-                "endDate": {
-                    "required": false,
-                    "type": "string",
-                    "example": "date"
-                },
-                "hardCap": {
-                    "required": false,
-                    "type": "number",
-                    "example": "0.1"
-                },
-                "rate": {
-                    "required": false,
-                    "type": "number",
-                    "example": "0.1"
-                },
-                "fundingAddress": {
-                    "required": false,
-                    "type": "string",
-                    "example": "0x204737b3c54555ea92a5aabc25c5ae2395f38df4"
-                },
-                "stoAddress": {
-                    "required": false,
-                    "type": "string",
-                    "example": "0x204737b3c54555ea92a5aabc25c5ae2395f38df4"
-                },
-                "deployLegacy": {
-                    "required": false,
-                    "type": "boolean",
-                    "example": true
+                    "example": "Inactive/Deactive/Active"
                 }
             }
         },

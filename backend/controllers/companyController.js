@@ -25,6 +25,24 @@ module.exports = {
     }
   },
 
+  fetchStatus: async (req, res, next) => {
+    try {
+      logger.info('Check company status Request', req.params);
+
+      const companyResult = await companyService.fetch(req.params.companyName);
+      if (!companyResult) {
+        next(Boom.conflict('Company does not exists'));
+      } else {
+        let success = companyResult.licenseStatus == 'Active' ? true : false;
+        res.data = { success };
+        next();
+      }
+    } catch (err) {
+      logger.error(err);
+      next(Boom.conflict('Something went wrong'));
+    }
+  },
+
   register: async (req, res, next) => {
     try {
       logger.info('Register Company Request', req.body);

@@ -1,31 +1,21 @@
 /* ********************************* Import Local Modules ********************************* */
-const { companyController } = require('./controllers');
+const { adminController, companyController } = require('./controllers');
+const { validator } = require('./middlewares');
 
 module.exports = (app) => {
 
-  /** APIs FOR COMPANY CREATION **/
-  app.post('/company', companyController.register);
+  /** APIs FOR COMPANY **/
+  app.post('/company', validator, companyController.register);
 
-  app.get('/company/:companyName', companyController.fetch);
+  app.get('/company/:companyName/status', validator, companyController.fetchStatus);
 
-  // app.get('/company', companyController.fetchAll);
+  app.get('/company/:companyName', validator, companyController.fetch);
 
-  // /** APIs FOR KYC SUBMISSION */
-  // app.get('/kyc', userController.fetchKyc);
+  /** APIs FOR ADMIN */
+  app.get('/admin/company/:companyName', validator, adminController.fetch);
 
-  // app.get('/kyc/:publicAddress/doc/:docType', userController.fetchKycDoc);
+  app.get('/admin/company', validator, adminController.fetchAll);
 
-  // app.post('/kyc', userController.submitKyc);
+  app.put('/admin/company', validator, adminController.updateDetails);
 
-  // app.post('/kyc/doc', upload.any(), userController.kycDocUpload);
-
-  // /** APIs FOR TOKEN **/
-  // app.get('/token', tokenController.fetchToken);
-
-  // app.post('/token', tokenController.createToken);
-
-  // app.put('/token', tokenController.updateToken);
-
-
-  // app.post('/auth', authController.createAuth);
 };
