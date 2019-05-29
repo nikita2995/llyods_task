@@ -14,7 +14,7 @@ module.exports = {
   },
 
   register: async (data) => {
-    data.license.status = "Inactive";
+    data.licenseStatus = "Inactive";
     const company = new Companies(data);
     const result = await company.save();
     return result;

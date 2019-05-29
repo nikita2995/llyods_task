@@ -12,11 +12,9 @@ var companySchema = mongoose.Schema({
     lastName: { type: String },
     email: { type: String },
     companyName: { type: String },
-    license: {
-        startDate: { type: Date },
-        endDate: { type: Date },
-        status: { type: String, enum: ['Inactive', 'Active', 'Deactive'], defualt: 'Inactive' }
-    },
+    licenseStartDate: { type: Date },
+    licenseEndDate: { type: Date },
+    licenseStatus: { type: String, enum: ['Inactive', 'Active', 'Deactive'], defualt: 'Inactive' },
     createdAt: { type: Number }
 });
 

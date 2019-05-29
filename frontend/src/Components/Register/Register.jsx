@@ -4,8 +4,16 @@ import './Register.css';
 
 class Register extends React.Component {
 
-	submitHandler(event) {
-		console.log(this.state);
+	submitHandler() {
+		fetch('http://localhost:5000/api/company', {
+			method: 'POST', // or 'PUT'
+			body: JSON.stringify(this.state), // data can be `string` or {object}!
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		}).then(res => res.json())
+			.then(response => alert(response.data))
+			.catch(error => console.error('Error:', error));
 	}
 
 	state = {
